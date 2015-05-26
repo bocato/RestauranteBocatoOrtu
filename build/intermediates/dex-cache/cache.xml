@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Library/Android/extras/android/m2repository/com/android/support/support-annotations/22.1.1/support-annotations-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
+        <dex dex="/Users/bocato/StudioProjects/RestauranteSQLite/app/build/intermediates/pre-dexed/debug/support-annotations-22.1.1-f7b9446d4c75d5b36e33fc0b74628d20454adf3e.jar" />
+    </item>
+    <item
+        jar="/Users/bocato/StudioProjects/RestauranteSQLite/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
+        <dex dex="/Users/bocato/StudioProjects/RestauranteSQLite/app/build/intermediates/pre-dexed/debug/classes-482a7d690929b9df64d1377adc6115a08ab90ccd.jar" />
+    </item>
+    <item
+        jar="/Users/bocato/StudioProjects/RestauranteSQLite/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
+        <dex dex="/Users/bocato/StudioProjects/RestauranteSQLite/app/build/intermediates/pre-dexed/debug/classes-4819673823b27c71417b7253e80c72516af2eec3.jar" />
+    </item>
+    <item
+        jar="/Users/bocato/StudioProjects/RestauranteSQLite/app/build/intermediates/exploded-aar/com.android.support/support-v13/22.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="fcf32027f88ac0be1b54b16167a30bde06ab6cd1">
+        <dex dex="/Users/bocato/StudioProjects/RestauranteSQLite/app/build/intermediates/pre-dexed/debug/classes-ae7494afb3d31ad53b1ec67175f5a6f3e5ba3597.jar" />
+    </item>
+    <item
+        jar="/Users/bocato/StudioProjects/RestauranteSQLite/app/build/intermediates/exploded-aar/com.android.support/support-v13/22.1.1/jars/libs/internal_impl-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="50fd8c7c5556b3516f569f71ed189d61441d59cf">
+        <dex dex="/Users/bocato/StudioProjects/RestauranteSQLite/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.1-a2952cede514072627d13a25da95f9c1d2bfb9c3.jar" />
+    </item>
+    <item
+        jar="/Users/bocato/StudioProjects/RestauranteSQLite/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/jars/libs/internal_impl-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
+        <dex dex="/Users/bocato/StudioProjects/RestauranteSQLite/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.1-652796c04e3552e7f418801c71b8e8bc390bca6c.jar" />
+    </item>
+
+</items>

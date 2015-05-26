@@ -1,0 +1,21 @@
+ENTREGA: Apresentar ao final da aula. Se não estiver finalizado, apresentar o que foi desenvolvido na aula, e o app completo em 28/05/2015.
+
+Fazer um app Android para registrar pedidos em um restaurante. O app deve apresentar um menu inicial com as opções:
+
+Registrar dados do cliente:
+receber informações do cliente (nome, endereço, etc... ) ou da mesa (nro da mesa) para configuração do app.
+Armazenar esses dados num Shared Preferences e recuperar cada início de aplicativo.
+Opção pode ser usada para atualização do cliente
+
+Consultar cardápio:
+Exibir uma lista com os produtos (pode agrupá-los em Entradas, Carnes, Peixes, Porções, etc...).
+Use um CustomListView exibindo o nome, o preço e um ícone da foto.
+Ao selecionar um elemento, exibir descrição do prato, o preço e a foto, e um botão para adicioná-lo ao pedido. Se preferir, inclua um botão para incrementar um à quantidade a ser adicionada ao pedido.
+Ao adicionar um produto ao pedido, emitir uma notificação.
+Armazenar os dados do cardápio em uma base SQLite.
+
+Consultar pedido:
+Listar os produtos pedidos com os seus preços e o total do pedido. Ao lado de cada produto, incluir um botão para excluir o produto do pedido. Se a quantidade for maior que um, diminua um na quantidade, caso contrário, exclua o produto do pedido.
+Inclua um elemento gráfico para confirmar o pedido, enviando ao servidor do estabelecimento.
+
+Se preferir, gravar o pedido em formato padrão (XML, JSON, etc...) para poder ser enviado.
