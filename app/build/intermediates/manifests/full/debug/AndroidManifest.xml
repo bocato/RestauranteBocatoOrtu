@@ -27,7 +27,7 @@
         <!-- DashBoard / MainActivity -->
         <activity
             android:name="comp.ufu.restaurante.activities.LoginActivity"
-            android:label="User Login" >
+            android:label="@string/app_name" >
         </activity>
     </application>
 

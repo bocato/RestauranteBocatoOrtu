@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,9 @@ public class MainScreen extends Activity {
 
 	// Button Logout
 	Button btnLogout, btnUpdate;
+
+	// listview
+	ListView listView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,8 @@ public class MainScreen extends Activity {
 		});
 
 		btnUpdate = (Button) findViewById(R.id.btn_update);
+
+		listView = (ListView) findViewById(R.id.list);
 	}
 
 }

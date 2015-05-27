@@ -77,13 +77,4 @@
         android:textColor="#FFFFFF"
         android:textStyle="bold"/>
 
-
-    <!-- Login button -->
-    <Button android:id="@+id/btnRegister"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Registrar"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"/>
-
 </LinearLayout>

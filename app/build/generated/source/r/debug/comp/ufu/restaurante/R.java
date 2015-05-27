@@ -1537,10 +1537,9 @@ containing a value of this type.
         public static final int always=0x7f0b0016;
         public static final int beginning=0x7f0b0013;
         public static final int btnLogin=0x7f0b0051;
-        public static final int btnRegister=0x7f0b0052;
         public static final int btn_food_img=0x7f0b0057;
-        public static final int btn_logout=0x7f0b0056;
-        public static final int btn_update=0x7f0b0055;
+        public static final int btn_logout=0x7f0b0055;
+        public static final int btn_update=0x7f0b0054;
         public static final int buttonPanel=0x7f0b0036;
         public static final int checkbox=0x7f0b0038;
         public static final int collapseActionView=0x7f0b0017;
@@ -1565,8 +1564,9 @@ containing a value of this type.
         public static final int icon=0x7f0b002b;
         public static final int ifRoom=0x7f0b0018;
         public static final int image=0x7f0b0028;
-        public static final int label_name=0x7f0b0053;
-        public static final int label_table=0x7f0b0054;
+        public static final int label_name=0x7f0b0052;
+        public static final int label_table=0x7f0b0053;
+        public static final int list=0x7f0b0056;
         public static final int listMode=0x7f0b0009;
         public static final int list_item=0x7f0b002a;
         public static final int middle=0x7f0b0015;

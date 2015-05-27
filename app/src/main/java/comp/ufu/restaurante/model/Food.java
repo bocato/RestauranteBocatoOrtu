@@ -7,22 +7,17 @@ public class Food {
 
     private int id;
     private String type; // meat, fish, entry
+    private String name;
     private String description;
     private String image;
     private float price;
 
     public Food(){};
 
-    public Food(int id, String type, String description, String image, float price) {
+    public Food(int id, String type, String name, String description, String image, float price) {
         this.id = id;
         this.type = type;
-        this.description = description;
-        this.price = price;
-        this.image = image;
-    }
-
-    public Food(String type, String description, String image, float price) {
-        this.type = type;
+        this.name = name;
         this.description = description;
         this.price = price;
         this.image = image;
@@ -43,6 +38,10 @@ public class Food {
     public void setType(String type) {
         this.type = type;
     }
+
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
 
     public String getDescription() {
         return description;
