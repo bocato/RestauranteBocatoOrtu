@@ -1,4 +1,4 @@
-package comp.ufu.restaurante;
+package comp.ufu.restaurante.activities;
 
 import android.app.Activity;
 

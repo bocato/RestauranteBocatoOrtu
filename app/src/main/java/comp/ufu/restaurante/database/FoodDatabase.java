@@ -24,10 +24,10 @@ public class FoodDatabase extends SQLiteOpenHelper {
     // Database Name
     private static final String DATABASE_NAME = "restaurant_menu";
 
-    // Contacts table name
+    // table name
     private static final String TABLE_MENU = "menu";
 
-    // Contacts Table Columns names
+    // Table Columns names
     private static final String KEY_ID = "id";
     private static final String KEY_TYPE = "type";
     private static final String KEY_DESCRIPTION = "description";
@@ -62,7 +62,7 @@ public class FoodDatabase extends SQLiteOpenHelper {
      * All CRUD(Create, Read, Update, Delete) Operations
      */
 
-    // Adding new user
+    // Adding
     public void addFood(Food food) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -75,7 +75,7 @@ public class FoodDatabase extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
-    // Getting single contact
+    // Getting single
     Food getFood(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -93,7 +93,7 @@ public class FoodDatabase extends SQLiteOpenHelper {
         return food;
     }
 
-    // Getting All Contacts
+    // Getting All
     public ArrayList<Food> getAllFood() {
         try {
             food_list.clear();
@@ -150,7 +150,7 @@ public class FoodDatabase extends SQLiteOpenHelper {
         db.close();
     }
 
-    // Getting contacts Count
+    // Getting count
     public int getTotalFoodOnMenu() {
         String countQuery = "SELECT  * FROM " + TABLE_MENU;
         SQLiteDatabase db = this.getReadableDatabase();

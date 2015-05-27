@@ -1,0 +1,89 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/rest_mineiro"
+    android:padding="10dip"
+    android:weightSum="1">
+
+    <!-- Table Label -->
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Restaurante Bacalá"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:layout_marginBottom="5dip"
+        android:textSize="32dp"
+        android:textAlignment="center"/>
+
+    <!-- Table Label -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eduardo Bocato | Caio Ortu"
+        android:textColor="#FFFFFF"
+        android:singleLine="true"
+        android:layout_marginBottom="5dip"
+        android:textSize="12dp"
+        android:layout_gravity="center_horizontal" />
+
+    <!-- Table Label -->
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Nome"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:layout_marginBottom="5dip"/>
+
+    <!-- Name input text -->
+    <EditText android:id="@+id/txtName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dip"
+        android:singleLine="true"
+        android:background="#FFFFFF"
+        android:alpha="0.25"
+        android:layout_weight="0.04" />
+
+    <!-- Table Label -->
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Número da Mesa"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginBottom="5dip"/>
+
+    <!-- Table input text -->
+    <EditText android:id="@+id/txtTable"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dip"
+        android:singleLine="true"
+        android:background="#FFFFFF"
+        android:alpha="0.25"
+        android:layout_weight="0.04" />
+
+    <!-- Login button -->
+    <Button android:id="@+id/btnLogin"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"/>
+
+
+    <!-- Login button -->
+    <Button android:id="@+id/btnRegister"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Registrar"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"/>
+
+</LinearLayout>
