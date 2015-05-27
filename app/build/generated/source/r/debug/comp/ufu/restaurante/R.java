@@ -1512,10 +1512,12 @@ containing a value of this type.
         public static final int ic_launcher=0x7f02003c;
         public static final int ic_menu_delete=0x7f02003d;
         public static final int ic_menu_edit=0x7f02003e;
-        public static final int no_food=0x7f02003f;
-        public static final int rest_mineiro=0x7f020040;
-        public static final int restaurant=0x7f020041;
-        public static final int success=0x7f020042;
+        public static final int minus=0x7f02003f;
+        public static final int no_food=0x7f020040;
+        public static final int plus=0x7f020041;
+        public static final int rest_mineiro=0x7f020042;
+        public static final int restaurant=0x7f020043;
+        public static final int success=0x7f020044;
     }
     public static final class id {
         public static final int action_bar=0x7f0b0040;
@@ -1531,14 +1533,16 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0b003d;
         public static final int action_mode_bar_stub=0x7f0b003c;
         public static final int action_mode_close_button=0x7f0b0025;
-        public static final int action_settings=0x7f0b005c;
+        public static final int action_settings=0x7f0b0060;
         public static final int activity_chooser_view_content=0x7f0b0026;
         public static final int alertTitle=0x7f0b0030;
         public static final int always=0x7f0b0016;
         public static final int beginning=0x7f0b0013;
         public static final int btnLogin=0x7f0b0051;
+        public static final int btn_add_food=0x7f0b005e;
         public static final int btn_food_img=0x7f0b0057;
         public static final int btn_logout=0x7f0b0055;
+        public static final int btn_subtract_food=0x7f0b005f;
         public static final int btn_update=0x7f0b0054;
         public static final int buttonPanel=0x7f0b0036;
         public static final int checkbox=0x7f0b0038;
@@ -1557,8 +1561,10 @@ containing a value of this type.
         public static final int expanded_menu=0x7f0b0037;
         public static final int food_description_txt=0x7f0b0059;
         public static final int food_name_txt=0x7f0b0058;
-        public static final int food_price=0x7f0b005a;
-        public static final int food_quantity=0x7f0b005b;
+        public static final int food_price=0x7f0b005b;
+        public static final int food_price_label=0x7f0b005a;
+        public static final int food_quantity=0x7f0b005d;
+        public static final int food_quantity_label=0x7f0b005c;
         public static final int home=0x7f0b0004;
         public static final int homeAsUp=0x7f0b000d;
         public static final int icon=0x7f0b002b;
