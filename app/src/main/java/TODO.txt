@@ -11,7 +11,8 @@ Fazer um app Android para registrar pedidos em um restaurante. O app deve aprese
 2 - Consultar cardápio:
     2.1 - Exibir uma lista com os produtos (pode agrupá-los em Entradas, Carnes, Peixes, Porções, etc...).
     (OK) 2.2 - Use um CustomListView exibindo o nome, o preço e um ícone da foto.
-    2.3 - Ao selecionar um elemento, exibir descrição do prato, o preço e a foto, e um botão para adicioná-lo ao pedido. Se preferir, inclua um botão para incrementar um à quantidade a ser adicionada ao pedido.
+    2.3 - Ao selecionar um elemento, exibir descrição do prato, o preço e a foto, e um botão para adicioná-lo ao pedido.
+          Se preferir, inclua um botão para incrementar um à quantidade a ser adicionada ao pedido.
     2.4 - Ao adicionar um produto ao pedido, emitir uma notificação.
     (OK) 2.5 - Armazenar os dados do cardápio em uma base SQLite.
 

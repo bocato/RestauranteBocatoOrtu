@@ -73,7 +73,7 @@ public class Order {
             orders += id+"#"+quantity+"-";
         }
 
-        String allOrders = orders.substring(0,(orders.lastIndexOf(".")-1));
+        String allOrders = orders.substring(0,(orders.lastIndexOf("-")));
 
         return allOrders;
     }

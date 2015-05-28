@@ -15,6 +15,7 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.util.HashMap;
+import java.util.List;
 
 import comp.ufu.restaurante.R;
 import comp.ufu.restaurante.tools.AlertDialogManager;
@@ -23,16 +24,16 @@ import comp.ufu.restaurante.tools.SessionManager;
 public class MainScreen extends Activity {
 
 	// Alert Dialog Manager
-	AlertDialogManager alert = new AlertDialogManager();
+	private AlertDialogManager alert = new AlertDialogManager();
 
 	// Session Manager Class
-	SessionManager session;
+	private SessionManager session;
 
 	// Button Logout
-	Button btnLogout, btnUpdate;
+	private Button btnLogout, btnUpdate, btnCloseOrder;
 
 	// listview
-	ListView listView;
+	private ListView listViewEntradas, listViewCarnes, listViewPorcoes, listViewBebidas;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -86,9 +87,17 @@ public class MainScreen extends Activity {
 			}
 		});
 
-		btnUpdate = (Button) findViewById(R.id.btn_update);
+		btnUpdate = (Button) findViewById(R.id.btn_update); // TODO: Implement
 
-		listView = (ListView) findViewById(R.id.list);
+		// Cardapio
+		listViewEntradas = (ListView) findViewById(R.id.list_entradas);
+		listViewCarnes = (ListView) findViewById(R.id.list_carnes);
+		listViewPorcoes = (ListView) findViewById(R.id.list_porcoes);
+		listViewBebidas = (ListView) findViewById(R.id.list_bebidas);
+
+		// Button logout
+		btnCloseOrder = (Button) findViewById(R.id.btn_close_order);
+
 	}
 
 }
