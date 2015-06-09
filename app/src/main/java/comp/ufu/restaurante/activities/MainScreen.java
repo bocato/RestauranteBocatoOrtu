@@ -18,8 +18,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import comp.ufu.restaurante.R;
+import comp.ufu.restaurante.database.FoodDatabase;
+import comp.ufu.restaurante.model.Order;
 import comp.ufu.restaurante.tools.AlertDialogManager;
 import comp.ufu.restaurante.tools.SessionManager;
+import comp.ufu.restaurante.util.FoodListViewArrayAdapter;
 
 public class MainScreen extends Activity {
 
@@ -32,8 +35,11 @@ public class MainScreen extends Activity {
 	// Button Logout
 	private Button btnLogout, btnUpdate, btnCloseOrder;
 
-	// listview
-	private ListView listViewEntradas, listViewCarnes, listViewPorcoes, listViewBebidas;
+	// food_listview
+	private ListView listViewEntradas, listViewCarnes, listViewPorcoes, listViewBebidas, listViewCardapio;
+
+	// orders
+	private Order myCurrentOrder;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +56,6 @@ public class MainScreen extends Activity {
 		btnLogout = (Button) findViewById(R.id.btn_logout);
 
 		Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
-
 
 		/**
 		 * Call this function whenever you want to check user login
@@ -72,6 +77,8 @@ public class MainScreen extends Activity {
 		lblName.setText(Html.fromHtml("Nome: <b>" + name + "</b>"));
 		lblEmail.setText(Html.fromHtml("Número da Mesa: <b>" + table + "</b>"));
 
+		// set my current order
+		myCurrentOrder = new Order(table);
 
 		/**
 		 * Logout button click event
@@ -90,14 +97,28 @@ public class MainScreen extends Activity {
 		btnUpdate = (Button) findViewById(R.id.btn_update); // TODO: Implement
 
 		// Cardapio
-		listViewEntradas = (ListView) findViewById(R.id.list_entradas);
-		listViewCarnes = (ListView) findViewById(R.id.list_carnes);
-		listViewPorcoes = (ListView) findViewById(R.id.list_porcoes);
-		listViewBebidas = (ListView) findViewById(R.id.list_bebidas);
+		inflateListViewLayouts();
 
 		// Button logout
 		btnCloseOrder = (Button) findViewById(R.id.btn_close_order);
 
+	}
+
+	private void inflateListViewLayouts(){
+		listViewCardapio = (ListView) findViewById(R.id.list_cardapio);
+		listViewCardapio.setAdapter(new FoodListViewArrayAdapter(this, FoodDatabase.getInstance().getCardapio(), myCurrentOrder));
+
+//		listViewEntradas = (ListView) findViewById(R.id.list_entradas);
+//		listViewEntradas.setAdapter(new FoodListViewArrayAdapter(this, FoodDatabase.getInstance().getEntradas(), myCurrentOrder));
+//
+//		listViewCarnes = (ListView) findViewById(R.id.list_carnes);
+//		listViewCarnes.setAdapter(new FoodListViewArrayAdapter(this, FoodDatabase.getInstance().getCarnes(), myCurrentOrder));
+//
+//		listViewPorcoes = (ListView) findViewById(R.id.list_porcoes);
+//		listViewPorcoes.setAdapter(new FoodListViewArrayAdapter(this, FoodDatabase.getInstance().getPorcoes(), myCurrentOrder));
+//
+//		listViewBebidas = (ListView) findViewById(R.id.list_bebidas);
+//		listViewBebidas.setAdapter(new FoodListViewArrayAdapter(this, FoodDatabase.getInstance().getBebidas(), myCurrentOrder));
 	}
 
 }

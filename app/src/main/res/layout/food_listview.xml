@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal" >
+    android:orientation="vertical"
+    android:id="@+id/food_listview_linear_layout"
+    android:background="#ff000000">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -16,7 +18,7 @@
             android:orientation="horizontal"
             android:weightSum="1">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_food_img"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
@@ -25,41 +27,52 @@
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:text=""
-                android:layout_gravity="left" />
+                android:layout_gravity="left"
+                android:padding="2dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:weightSum="2"
-                android:layout_weight="0.93">
+                android:layout_weight="0.93"
+                android:padding="2dp">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:layout_gravity="center_vertical|right"
-                    android:layout_weight="1.63">
+                    android:layout_weight="1.37"
+                    android:padding="2dp">
 
                     <TextView
                         android:id="@+id/food_name_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="FOOD NAME"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textStyle="bold"
+                        android:textColor="#ffffff"
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/food_description_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="DESCRIPTION"
-                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textStyle="bold"
+                        android:textColor="#ffffff"
+                        android:textSize="10dp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:weightSum="2"
+                    android:layout_weight="0.34"
+                    android:padding="2dp">
                     <TextView
                         android:id="@+id/food_price_label"
                         android:layout_width="wrap_content"
@@ -67,15 +80,19 @@
                         android:layout_marginRight="5dp"
                         android:text="R$"
                         android:textStyle="bold"
+                        android:textColor="#ffffff"
                         android:textAlignment="center"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center_horizontal" />
                     <TextView
                         android:id="@+id/food_price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:text="0"
-                        android:layout_gravity="center_vertical" />
+                        android:textStyle="bold"
+                        android:textColor="#ffffff"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="10dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -91,39 +108,60 @@
                     android:layout_marginRight="5dp"
                     android:text="Quantidade"
                     android:textStyle="bold"
+                    android:textColor="#ffffff"
                     android:textAlignment="center"
-                    android:layout_gravity="center_vertical" />
+                    android:layout_gravity="center_horizontal" />
                 <TextView
                     android:id="@+id/food_quantity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:text="0"
-                    android:layout_gravity="center_vertical" />
+                    android:layout_gravity="center_horizontal|left"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:layout_weight="1.85" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="2"
                     android:paddingRight="5dp"
-                    android:paddingLeft="5dp">
+                    android:paddingLeft="5dp"
+                    android:padding="2dp">
 
                     <Button
                         android:id="@+id/btn_add_food"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:background="@drawable/plus"
                         android:text=""
-                        android:paddingRight="10dp" />
+                        android:paddingRight="10dp"
+                        android:textStyle="bold"
+                        android:textColor="#ffffff"
+                        android:paddingLeft="10dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="-----"
+                        android:id="@+id/textView"
+                        android:background="#ff000000"
+                        android:textColor="#ff000000" />
+
                     <Button
                         android:id="@+id/btn_subtract_food"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:background="@drawable/minus"
                         android:text=""
                         android:gravity="center_vertical|right"
-                        android:paddingLeft="10dp" />
+                        android:paddingLeft="10dp"
+                        android:textStyle="bold"
+                        android:textColor="#ffffff"
+                        android:paddingRight="10dp" />
                 </LinearLayout>
             </LinearLayout>
 
