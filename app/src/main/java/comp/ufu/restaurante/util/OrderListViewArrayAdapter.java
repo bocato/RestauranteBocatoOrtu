@@ -10,22 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.util.Arrays;
 import java.util.List;
 
 import comp.ufu.restaurante.R;
-import comp.ufu.restaurante.database.FoodDatabase;
 import comp.ufu.restaurante.model.Food;
 import comp.ufu.restaurante.model.Order;
 
-public class FoodListViewArrayAdapter extends ArrayAdapter<Food> {
+public class OrderListViewArrayAdapter extends ArrayAdapter<Food> {
 
     private Button btnAddFood, btnSubtractFood;
     private ImageView foodImg;
@@ -33,7 +28,7 @@ public class FoodListViewArrayAdapter extends ArrayAdapter<Food> {
     private Order myCurrentOrder;
     private int[] foodOrdered;
 
-    public FoodListViewArrayAdapter(Context context, List<Food> foodArrayList, Order myCurrentOrder) {
+    public OrderListViewArrayAdapter(Context context, List<Food> foodArrayList, Order myCurrentOrder) {
         super(context, 0, foodArrayList);
         this.myCurrentOrder = myCurrentOrder;
         foodOrdered = myCurrentOrder.getFoodOrdered();
@@ -81,6 +76,11 @@ public class FoodListViewArrayAdapter extends ArrayAdapter<Food> {
                 TextView foodQuantityTextView = (TextView) finalConvertView.findViewById(R.id.food_quantity_txt);
                 foodQuantityTextView.setText(newQuantity);
 
+                // update total value on order
+                TextView totalValueTextView = (TextView) finalConvertView.findViewById(R.id.text_view_total_value);
+                if(totalValueTextView != null){
+                    totalValueTextView.setText("" + myCurrentOrder.getTotalSpent());
+                }
                 //System.out.println(food.getName() + " = " + newQuantity);
 
                 //System.out.println("END ** foodOrdered["+(food.getId()-1)+"] = "+ foodOrdered[food.getId()-1]);
@@ -105,6 +105,11 @@ public class FoodListViewArrayAdapter extends ArrayAdapter<Food> {
                 TextView foodQuantityTextView = (TextView) finalConvertView.findViewById(R.id.food_quantity_txt);
                 foodQuantityTextView.setText(newQuantity);
 
+                // update total value on order
+                TextView totalValueTextView = (TextView) finalConvertView.findViewById(R.id.text_view_total_value);
+                if(totalValueTextView != null){
+                    totalValueTextView.setText("" + myCurrentOrder.getTotalSpent());
+                }
                 //System.out.println(food.getName() + " = " + newQuantity);
 
                 //System.out.println("END ** foodOrdered["+(food.getId()-1)+"] = "+ foodOrdered[food.getId()-1]);

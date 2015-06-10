@@ -16,15 +16,15 @@ public class Order {
     private int id;
     private String table;
     private int foodOrdered[]; // list[product_id] = quantity>
-    private double totalSpent;
+    private float totalSpent;
     private FoodDatabase foodDatabase = FoodDatabase.getInstance();
 
     public Order(){}
 
     public Order(String table){
         this.table = table;
-        this.foodOrdered = new int[foodDatabase.getCardapio().size()];
-        this.totalSpent = 0.0;
+        this.foodOrdered = new int[foodDatabase.getCardapio().size()+1];
+        this.totalSpent = 0;
     }
 
     public Order(String table, int[] foodOrdered){
@@ -65,7 +65,7 @@ public class Order {
     public String getOrders() {
         String orders = "";
 
-        for (int i = 0; i < foodOrdered.length; i++){
+        for (int i = 0; i < foodOrdered.length-1; i++){
             orders += i+"#"+foodOrdered[i]+"-";
         }
 
@@ -79,13 +79,13 @@ public class Order {
 
         for (int i = 0; i < foodOrdered.length; i++){
             int quantity = foodOrdered[i];
-            totalSpent += foodDatabase.getPriceById(i) * quantity;
+            totalSpent += foodDatabase.getCardapio().get(i).getPrice() * quantity;
         }
 
         return totalSpent;
     }
 
-    public void setTotalSpent(double totalSpent) {
+    public void setTotalSpent(float totalSpent) {
         this.totalSpent = totalSpent;
     }
 }

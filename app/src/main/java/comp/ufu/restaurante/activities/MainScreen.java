@@ -1,6 +1,7 @@
 package comp.ufu.restaurante.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -41,6 +42,9 @@ public class MainScreen extends Activity {
 	// orders
 	private Order myCurrentOrder;
 
+	// my info
+	private String name, table;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,7 +54,7 @@ public class MainScreen extends Activity {
 		session = new SessionManager(getApplicationContext());
 
 		TextView lblName = (TextView) findViewById(R.id.label_name);
-		TextView lblEmail = (TextView) findViewById(R.id.label_table);
+		TextView lblTable = (TextView) findViewById(R.id.label_table);
 
 		// Button logout
 		btnLogout = (Button) findViewById(R.id.btn_logout);
@@ -68,14 +72,14 @@ public class MainScreen extends Activity {
 		HashMap<String, String> user = session.getUserDetails();
 
 		// name
-		String name = user.get(SessionManager.KEY_NAME);
+		name = user.get(SessionManager.KEY_NAME);
 
 		// email
-		String table = user.get(SessionManager.KEY_TABLE);
+		table = user.get(SessionManager.KEY_TABLE);
 
 		// displaying user data
 		lblName.setText(Html.fromHtml("Nome: <b>" + name + "</b>"));
-		lblEmail.setText(Html.fromHtml("Número da Mesa: <b>" + table + "</b>"));
+		lblTable.setText(Html.fromHtml("Número da Mesa: <b>" + table + "</b>"));
 
 		// set my current order
 		myCurrentOrder = new Order(table);
@@ -95,12 +99,32 @@ public class MainScreen extends Activity {
 		});
 
 		btnUpdate = (Button) findViewById(R.id.btn_update); // TODO: Implement
+		btnUpdate.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(getApplicationContext(), "Clicou em Atualizar Dados!", Toast.LENGTH_LONG).show();
+			}
+		});
 
 		// Cardapio
 		inflateListViewLayouts();
 
 		// Button logout
 		btnCloseOrder = (Button) findViewById(R.id.btn_close_order);
+		btnCloseOrder.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(getApplicationContext(), "Clicou em Finalizar!\n"+myCurrentOrder.getOrders(), Toast.LENGTH_LONG).show();
+
+				// Starting FinalizeOrderActivity
+				Intent i = new Intent(getApplicationContext(), FinalizeOrderActivity.class);
+				i.putExtra("table", table);
+				i.putExtra("name", name);
+				i.putExtra("current_order", myCurrentOrder.getOrders());
+				startActivity(i);
+				finish();
+			}
+		});
 
 	}
 
@@ -109,4 +133,7 @@ public class MainScreen extends Activity {
 		listViewCardapio.setAdapter(new FoodListViewArrayAdapter(this, FoodDatabase.getInstance().getCardapio(), myCurrentOrder));
 	}
 
+	public Order getMyCurrentOrder() {
+		return myCurrentOrder;
+	}
 }

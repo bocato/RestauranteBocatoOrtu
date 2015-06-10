@@ -29,8 +29,8 @@
 
             <ImageView
                 android:id="@+id/btn_food_img"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:layout_marginRight="2dp"
                 android:background="@drawable/no_food"
                 android:focusable="false"
@@ -63,7 +63,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold"
                     android:textColor="#ffffff"
-                    android:textSize="10dp"
+                    android:textSize="18dp"
                     android:gravity="left" />
 
                 <TextView
@@ -74,7 +74,7 @@
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textStyle="bold"
                     android:textColor="#ffffff"
-                    android:textSize="8dp"
+                    android:textSize="14dp"
                     android:gravity="fill_horizontal|right"
                     android:paddingLeft="1dp"
                     android:paddingTop="1dp"
@@ -105,7 +105,8 @@
                     android:layout_marginBottom="1dp"
                     android:layout_marginLeft="1dp"
                     android:gravity="center_vertical|center_horizontal"
-                    android:layout_marginTop="1dp" />
+                    android:layout_marginTop="1dp"
+                    android:textSize="12dp" />
                 <TextView
                     android:id="@+id/food_price"
                     android:layout_width="fill_parent"
@@ -114,11 +115,11 @@
                     android:textStyle="bold"
                     android:textColor="#ffffff"
                     android:layout_gravity="center_horizontal"
-                    android:textSize="10dp"
+                    android:textSize="14dp"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
                     android:layout_marginBottom="1dp"
-                    android:text="0"
+                    android:text="0.00"
                     android:paddingLeft="2dp"
                     android:paddingTop="2dp"
                     android:paddingRight="2dp"
@@ -134,22 +135,23 @@
                 android:gravity="center_vertical|center_horizontal">
 
                 <TextView
-                    android:id="@+id/food_quantity"
+                    android:id="@+id/food_quantity_txt"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_marginRight="2dp"
-                    android:text="0"
                     android:layout_gravity="center_vertical"
                     android:textStyle="bold"
                     android:textColor="#ffffff"
                     android:layout_weight="1.85"
                     android:layout_marginLeft="2dp"
                     android:textAlignment="center"
-                    android:singleLine="true"
-                    android:textSize="12dp"
+                    android:textSize="16dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
-                    android:gravity="center_vertical|center_horizontal" />
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="0"
+                    android:enabled="true"
+                    android:editable="true" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -163,8 +165,8 @@
 
                     <Button
                         android:id="@+id/btn_add_food"
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:background="@drawable/plus"
                         android:text=""
                         android:paddingRight="1dp"
@@ -185,8 +187,8 @@
 
                     <Button
                         android:id="@+id/btn_subtract_food"
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:background="@drawable/minus"
                         android:text=""
                         android:gravity="center_vertical|right"

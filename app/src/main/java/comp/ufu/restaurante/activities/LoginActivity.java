@@ -78,16 +78,7 @@ public class LoginActivity extends Activity {
                         startActivity(i);
                         finish();
 
-                    }// TODO: consertar este erro pqp! tem que achar na porra da sharedPreferences
-//                    else if(name.equals(session.getSharedPreferences().getString("name", name)) && table.equals(session.getSharedPreferences().getString("table", table))){
-//                        // Creating user login session
-//                        session.createLoginSession(name, table);
-//
-//                        // Staring MainActivity
-//                        Intent i = new Intent(getApplicationContext(), MainScreen.class);
-//                        startActivity(i);
-//                        finish();
-//                    }
+                    }
                     else{
                         // username / table doesn't match
                         //alert.showAlertDialog(LoginActivity.this, "Login falhou...", "Nome/Mesa incorretos.", false);

@@ -27,7 +27,7 @@
         android:textColor="#FFFFFF"
         android:singleLine="true"
         android:layout_marginBottom="5dip"
-        android:textSize="12dp"
+        android:textSize="18dp"
         android:layout_gravity="center_horizontal" />
 
     <!-- Table Label -->
@@ -38,7 +38,8 @@
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:singleLine="true"
-        android:layout_marginBottom="5dip"/>
+        android:layout_marginBottom="5dip"
+        android:textSize="24dp" />
 
     <!-- Name input text -->
     <EditText android:id="@+id/txtName"
@@ -47,8 +48,14 @@
         android:layout_marginBottom="10dip"
         android:singleLine="true"
         android:background="#FFFFFF"
-        android:alpha="0.25"
-        android:layout_weight="0.04" />
+        android:alpha="0.50"
+        android:layout_weight="0.04"
+        android:textSize="20dp"
+        android:paddingLeft="2dp"
+        android:paddingTop="2dp"
+        android:paddingRight="2dp"
+        android:paddingBottom="2dp"
+        android:textStyle="bold" />
 
     <!-- Table Label -->
     <TextView
@@ -57,7 +64,8 @@
         android:text="Número da Mesa"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:layout_marginBottom="5dip"/>
+        android:layout_marginBottom="5dip"
+        android:textSize="24dp" />
 
     <!-- Table input text -->
     <EditText android:id="@+id/txtTable"
@@ -66,8 +74,15 @@
         android:layout_marginBottom="20dip"
         android:singleLine="true"
         android:background="#FFFFFF"
-        android:alpha="0.25"
-        android:layout_weight="0.04" />
+        android:alpha="0.50"
+        android:layout_weight="0.04"
+        android:textSize="20dp"
+        android:inputType="number"
+        android:paddingLeft="2dp"
+        android:paddingTop="2dp"
+        android:paddingRight="2dp"
+        android:paddingBottom="2dp"
+        android:textStyle="bold" />
 
     <!-- Login button -->
     <Button android:id="@+id/btnLogin"
@@ -75,6 +90,7 @@
         android:layout_height="wrap_content"
         android:text="Login"
         android:textColor="#FFFFFF"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:textSize="28dp" />
 
 </LinearLayout>
