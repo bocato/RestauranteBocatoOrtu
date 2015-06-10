@@ -10,11 +10,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import comp.ufu.restaurante.R;
 import comp.ufu.restaurante.database.FoodDatabase;
+import comp.ufu.restaurante.database.sqlite.OrderOperations;
 import comp.ufu.restaurante.model.Food;
 import comp.ufu.restaurante.model.Order;
 import comp.ufu.restaurante.tools.AlertDialogManager;
@@ -45,10 +47,21 @@ public class FinalizeOrderActivity extends Activity {
 	// food ordered
 	private ArrayList<Food> foodOrdered;
 
+	// database
+	private OrderOperations orderDbOperations = null;
+
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.finalize_order);
+
+		orderDbOperations = new OrderOperations(this);
+		try {
+			orderDbOperations.open();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		// getting data
 		String name = getIntent().getExtras().getString("name");
@@ -75,8 +88,9 @@ public class FinalizeOrderActivity extends Activity {
 		btnFinalizeOrder.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(), "Clicou em Finalizar!\n" + myCurrentOrder.getOrders(), Toast.LENGTH_LONG).show();
-				//db.addOrder(myCurrentOrder);
+				//Toast.makeText(getApplicationContext(), "Clicou em Finalizar!\n" + myCurrentOrder.getOrders(), Toast.LENGTH_LONG).show();
+				Order saved = orderDbOperations.addOrder(myCurrentOrder);
+				Toast.makeText(getApplicationContext(), "Pedido da mesa "+ saved.getTable() + " salvo com sucesso!", Toast.LENGTH_LONG).show();
 			}
 		});
 	}
