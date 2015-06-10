@@ -92,15 +92,17 @@ public class OrdersDatabase extends SQLiteOpenHelper {
         Order myOrder = new Order();
         myOrder.setId(id);
         myOrder.setTable(table);
+        int foodOrdered[];
 
-        HashMap<Integer, Integer> foodOrdered =  new HashMap<>();
-        String[] split1 = orders.split(".");
+        String[] split1 = orders.split("-");
+        foodOrdered = new int[split1.length];
         for(String split: split1){
             String[] split2 = split.split("#");
             int key = Integer.parseInt(split2[0]);
-            int value = Integer.parseInt(split2[0]);
-            foodOrdered.put(key, value);
+            int value = Integer.parseInt(split2[1]);
+            foodOrdered[key] = value;
         }
+
         myOrder.setFoodOrdered(foodOrdered);
         myOrder.setTotalSpent(myOrder.getTotalSpent());
 

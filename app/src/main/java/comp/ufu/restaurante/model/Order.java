@@ -1,5 +1,6 @@
 package comp.ufu.restaurante.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -14,7 +15,7 @@ public class Order {
 
     private int id;
     private String table;
-    private HashMap<Integer, Integer> foodOrdered; // <product_id , quantity>
+    private int foodOrdered[]; // list[product_id] = quantity>
     private double totalSpent;
     private FoodDatabase foodDatabase = FoodDatabase.getInstance();
 
@@ -22,16 +23,16 @@ public class Order {
 
     public Order(String table){
         this.table = table;
-        this.foodOrdered = new HashMap<>();
+        this.foodOrdered = new int[foodDatabase.getCardapio().size()];
         this.totalSpent = 0.0;
     }
 
-    public Order(String table, HashMap<Integer, Integer> foodOrdered){
+    public Order(String table, int[] foodOrdered){
         this.table = table;
         this.foodOrdered = foodOrdered;
     }
 
-    public Order(int id, String table, HashMap<Integer, Integer> foodOrdered){
+    public Order(int id, String table, int[] foodOrdered){
         this.id = id;
         this.table = table;
         this.foodOrdered = foodOrdered;
@@ -45,14 +46,6 @@ public class Order {
         this.table = table;
     }
 
-    public HashMap<Integer, Integer> getFoodOrdered() {
-        return foodOrdered;
-    }
-
-    public void setFoodOrdered(HashMap<Integer, Integer> foodOrdered) {
-        this.foodOrdered = foodOrdered;
-    }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -61,19 +54,22 @@ public class Order {
         return id;
     }
 
+    public int[] getFoodOrdered() {
+        return foodOrdered;
+    }
+
+    public void setFoodOrdered(int[] foodOrdered) {
+        this.foodOrdered = foodOrdered;
+    }
+
     public String getOrders() {
         String orders = "";
-        Set<HashMap.Entry<Integer, Integer>> entrySet = foodOrdered.entrySet();
-        Iterator<HashMap.Entry<Integer, Integer>> entrySetIterator = entrySet.iterator();
-        while (entrySetIterator.hasNext()) {
 
-            HashMap.Entry entry = entrySetIterator.next();
-            int id = (int) entry.getKey();
-            int quantity = (int) entry.getValue();
-            orders += id+"#"+quantity+"-";
+        for (int i = 0; i < foodOrdered.length; i++){
+            orders += i+"#"+foodOrdered[i]+"-";
         }
 
-        String allOrders = orders.substring(0,(orders.lastIndexOf("-")));
+        String allOrders = orders.substring(0, (orders.lastIndexOf("-")));
 
         return allOrders;
     }
@@ -81,15 +77,9 @@ public class Order {
     public double getTotalSpent() {
         float totalSpent = 0;
 
-        Set<HashMap.Entry<Integer, Integer>> entrySet = foodOrdered.entrySet();
-        Iterator<HashMap.Entry<Integer, Integer>> entrySetIterator = entrySet.iterator();
-        while (entrySetIterator.hasNext()) {
-
-            HashMap.Entry entry = entrySetIterator.next();
-            int id = (int) entry.getKey();
-            int quantity = (int) entry.getValue();
-
-            totalSpent += foodDatabase.getPriceById(id) * quantity;
+        for (int i = 0; i < foodOrdered.length; i++){
+            int quantity = foodOrdered[i];
+            totalSpent += foodDatabase.getPriceById(i) * quantity;
         }
 
         return totalSpent;

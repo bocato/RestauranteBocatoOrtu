@@ -107,18 +107,6 @@ public class MainScreen extends Activity {
 	private void inflateListViewLayouts(){
 		listViewCardapio = (ListView) findViewById(R.id.list_cardapio);
 		listViewCardapio.setAdapter(new FoodListViewArrayAdapter(this, FoodDatabase.getInstance().getCardapio(), myCurrentOrder));
-
-//		listViewEntradas = (ListView) findViewById(R.id.list_entradas);
-//		listViewEntradas.setAdapter(new FoodListViewArrayAdapter(this, FoodDatabase.getInstance().getEntradas(), myCurrentOrder));
-//
-//		listViewCarnes = (ListView) findViewById(R.id.list_carnes);
-//		listViewCarnes.setAdapter(new FoodListViewArrayAdapter(this, FoodDatabase.getInstance().getCarnes(), myCurrentOrder));
-//
-//		listViewPorcoes = (ListView) findViewById(R.id.list_porcoes);
-//		listViewPorcoes.setAdapter(new FoodListViewArrayAdapter(this, FoodDatabase.getInstance().getPorcoes(), myCurrentOrder));
-//
-//		listViewBebidas = (ListView) findViewById(R.id.list_bebidas);
-//		listViewBebidas.setAdapter(new FoodListViewArrayAdapter(this, FoodDatabase.getInstance().getBebidas(), myCurrentOrder));
 	}
 
 }

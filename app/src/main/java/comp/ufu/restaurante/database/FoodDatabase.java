@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
+import comp.ufu.restaurante.R;
 import comp.ufu.restaurante.model.Food;
 import comp.ufu.restaurante.model.User;
 
@@ -47,7 +48,7 @@ public class FoodDatabase{
         entrada1.setType("entrada");
         entrada1.setName("Tábua de Frios");
         entrada1.setDescription("Tábua de Frios com: Mussarela, Presunto, Azeitonas Verdes e Palmito.");
-        entrada1.setImage("tabua_de_frios");
+        entrada1.setImageResource(R.drawable.tabua_de_frios);
         entrada1.setPrice((float) 11.99);
 
         Food entrada2 = new Food();
@@ -55,7 +56,7 @@ public class FoodDatabase{
         entrada2.setType("entrada");
         entrada2.setName("Tábua de Frios 2");
         entrada2.setDescription("Tábua de Frios com: Mussarela, Queijo Prato, Presunto, Azeitonas Verdes, Azeitonas Pretas, Palmito, Salame, Lombinho Canadense, Champignom, ");
-        entrada2.setImage("tabua_de_frios_2");
+        entrada2.setImageResource(R.drawable.tabua_de_frios_2);
         entrada2.setPrice((float) 24.99);
 
         entradas.add(entrada1);
@@ -70,7 +71,7 @@ public class FoodDatabase{
         carne1.setType("carne");
         carne1.setName("Picanha na Chapa");
         carne1.setDescription("Picanha na Chapa e acompanhamentos.");
-        carne1.setImage("picanha_na_chapa");
+        carne1.setImageResource(R.drawable.picanha_na_chapa);
         carne1.setPrice((float) 39.99);
 
         Food carne2 = new Food();
@@ -78,7 +79,7 @@ public class FoodDatabase{
         carne2.setType("carne");
         carne2.setName("Costela");
         carne2.setDescription("Costela assada e acompanhamentos.");
-        carne2.setImage("costela");
+        carne2.setImageResource(R.drawable.costela);
         carne2.setPrice((float) 20.99);
 
         carnes.add(carne1);
@@ -93,7 +94,7 @@ public class FoodDatabase{
         porcao1.setType("porcao");
         porcao1.setName("Batata Frita");
         porcao1.setDescription("Batatas Fritas com queijo.");
-        porcao1.setImage("batata_frita");
+        porcao1.setImageResource(R.drawable.batata_frita);
         porcao1.setPrice((float) 9.99);
 
         Food porcao2 = new Food();
@@ -101,7 +102,7 @@ public class FoodDatabase{
         porcao2.setType("porcao");
         porcao2.setName("Bacon");
         porcao2.setDescription("Bacon, com bacon e adicional de bacon.");
-        porcao2.setImage("bacon");
+        porcao2.setImageResource(R.drawable.bacon);
         porcao2.setPrice((float) 19.99);
 
         porcoes.add(porcao1);
@@ -116,7 +117,7 @@ public class FoodDatabase{
         bebida1.setType("bebida");
         bebida1.setName("Refrigerante");
         bebida1.setDescription("Refrigerante 2L");
-        bebida1.setImage("refrigerante");
+        bebida1.setImageResource(R.drawable.refrigerante);
         bebida1.setPrice((float) 2.99);
 
         Food bebida2 = new Food();
@@ -124,7 +125,7 @@ public class FoodDatabase{
         bebida2.setType("bebida");
         bebida2.setName("Agua");
         bebida2.setDescription("Água mineral gelada.");
-        bebida2.setImage("agua");
+        bebida2.setImageResource(R.drawable.agua);
         bebida2.setPrice((float) 1.99);
 
         bebidas.add(bebida1);

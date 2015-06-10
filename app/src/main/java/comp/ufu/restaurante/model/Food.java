@@ -9,18 +9,18 @@ public class Food {
     private String type; // meat, fish, entry
     private String name;
     private String description;
-    private String image;
+    private int imageResource;
     private float price;
 
     public Food(){};
 
-    public Food(int id, String type, String name, String description, String image, float price) {
+    public Food(int id, String type, String name, String description, int imageResource, float price) {
         this.id = id;
         this.type = type;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.image = image;
+        this.imageResource = imageResource;
     }
 
     public int getId() {
@@ -59,12 +59,11 @@ public class Food {
         this.price = price;
     }
 
-    public String getImage() {
-        return image;
+    public int getImageResource() {
+        return imageResource;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageResource(int imageResource) {
+        this.imageResource = imageResource;
     }
-
 }

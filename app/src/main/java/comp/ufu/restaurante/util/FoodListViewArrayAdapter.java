@@ -5,7 +5,6 @@ package comp.ufu.restaurante.util;
  */
 
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +32,7 @@ public class FoodListViewArrayAdapter extends ArrayAdapter<Food> {
 
     public FoodListViewArrayAdapter(Context context, List<Food> foodArrayList, Order myCurrentOrder) {
         super(context, 0, foodArrayList);
-        myCurrentOrder = myCurrentOrder;
+        this.myCurrentOrder = myCurrentOrder;
     }
 
     @Override
@@ -60,26 +59,27 @@ public class FoodListViewArrayAdapter extends ArrayAdapter<Food> {
         foodQuantityTxt.setText("0");
 
         // configuring the Buttons
-        int imgResourceID = FoodListViewArrayAdapter.this.getContext().getResources().getIdentifier("ball_red", "drawable", FoodListViewArrayAdapter.this.getContext().getPackageName());
-        btnFoodImg.setBackgroundResource(imgResourceID);
+        btnFoodImg.setBackgroundResource(food.getImageResource());
 
         btnAddFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int quantity = myCurrentOrder.getFoodOrdered().get(food.getId()) + 1;
-                foodQuantityTxt.setText(""+quantity);
-                myCurrentOrder.getFoodOrdered().remove(food.getId());
-                myCurrentOrder.getFoodOrdered().put(food.getId(), quantity);
+                int quantity = myCurrentOrder.getFoodOrdered()[food.getId()] + 1;
+                String quantityTxt = "" + quantity;
+                foodQuantityTxt.setText(quantityTxt);
+                myCurrentOrder.getFoodOrdered()[food.getId()] = quantity;
+                System.out.println(quantityTxt);
             }
         });
 
         btnSubtractFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int quantity = myCurrentOrder.getFoodOrdered().get(food.getId()) - 1;
-                foodQuantityTxt.setText(""+quantity);
-                myCurrentOrder.getFoodOrdered().remove(food.getId());
-                myCurrentOrder.getFoodOrdered().put(food.getId(), quantity);
+                int quantity = myCurrentOrder.getFoodOrdered()[food.getId()] - 1;
+                String quantityTxt = "" + quantity;
+                foodQuantityTxt.setText(quantityTxt);
+                myCurrentOrder.getFoodOrdered()[food.getId()] = quantity;
+                v.invalidate();
             }
         });
 
