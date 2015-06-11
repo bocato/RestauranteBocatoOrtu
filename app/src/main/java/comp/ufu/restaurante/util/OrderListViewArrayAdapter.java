@@ -19,6 +19,7 @@ import java.util.List;
 import comp.ufu.restaurante.R;
 import comp.ufu.restaurante.model.Food;
 import comp.ufu.restaurante.model.Order;
+import comp.ufu.restaurante.tools.AlertDialogManager;
 
 public class OrderListViewArrayAdapter extends ArrayAdapter<Food> {
 
@@ -27,6 +28,9 @@ public class OrderListViewArrayAdapter extends ArrayAdapter<Food> {
     private TextView foodNameTxt, foodDescriptionTxt, foodPriceTxt, foodQuantityTxt;
     private Order myCurrentOrder;
     private int[] foodOrdered;
+
+    // Alert Dialog Manager
+    private AlertDialogManager alert = new AlertDialogManager();
 
     public OrderListViewArrayAdapter(Context context, List<Food> foodArrayList, Order myCurrentOrder) {
         super(context, 0, foodArrayList);
@@ -68,7 +72,8 @@ public class OrderListViewArrayAdapter extends ArrayAdapter<Food> {
                 //System.out.println("INIT ** foodOrdered["+(food.getId()-1)+"] = "+ foodOrdered[food.getId()-1]);
                 
                 foodOrdered[food.getId()-1]++;
-                Toast.makeText(getContext(), "Adicionou "+food.getName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Adicionou "+food.getName(), Toast.LENGTH_SHORT).show();
+                alert.showAlertDialog(getContext(), "Aviso", "Adicionou "+food.getName(), false);
                 String newQuantity = ""+foodOrdered[food.getId()-1];
                 myCurrentOrder.setFoodOrdered(foodOrdered);
 
@@ -97,7 +102,8 @@ public class OrderListViewArrayAdapter extends ArrayAdapter<Food> {
                     foodOrdered[food.getId()-1]--;
                     String newQuantity = ""+foodOrdered[food.getId()-1];
                     myCurrentOrder.setFoodOrdered(foodOrdered);
-                    Toast.makeText(getContext(), "Removeu "+food.getName(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "Removeu "+food.getName(), Toast.LENGTH_SHORT).show();
+                    alert.showAlertDialog(getContext(), "Aviso", "Adicionou "+food.getName(), false);
                 }
                 String newQuantity = "" + foodOrdered[food.getId()-1];
 

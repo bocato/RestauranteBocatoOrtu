@@ -51,7 +51,7 @@ public class LoginActivity extends Activity {
         txtName = (EditText) findViewById(R.id.txtName);
         txtTable = (EditText) findViewById(R.id.txtTable);
 
-        Toast.makeText(getApplicationContext(), "Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), "Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
 
 
         // Login button

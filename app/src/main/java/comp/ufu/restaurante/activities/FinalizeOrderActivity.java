@@ -38,7 +38,7 @@ public class FinalizeOrderActivity extends Activity {
 	private SessionManager session;
 
 	// Button Logout
-	private Button btnFinalizeOrder, bntRefreshValue, btnListOrders;
+	private Button btnFinalizeOrder, bntRefreshValue;
 
 	// food_listview
 	private ListView listViewCardapio;
@@ -55,11 +55,13 @@ public class FinalizeOrderActivity extends Activity {
 	// database
 	private OrderOperations orderDbOperations = null;
 
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.finalize_order);
+
+		// Session class instance
+		session = new SessionManager(getApplicationContext());
 
 		orderDbOperations = new OrderOperations(this);
 		try {
@@ -67,6 +69,13 @@ public class FinalizeOrderActivity extends Activity {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
+		/**
+		 * Call this function whenever you want to check user login
+		 * This will redirect user to LoginActivity is he is not
+		 * logged in
+		 * */
+		session.checkLogin();
 
 		// getting data
 		String name = getIntent().getExtras().getString("name");
@@ -79,35 +88,6 @@ public class FinalizeOrderActivity extends Activity {
 		textViewTotal.setText("" + Math.floor(Math.floor(myCurrentOrder.getTotalSpent())));
 
 		// Button
-		btnListOrders = (Button) findViewById(R.id.btn_list_orders);
-		btnListOrders.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ArrayList<Order> orders = (ArrayList<Order>) orderDbOperations.getAllOrders();
-				AlertDialog.Builder adb = new AlertDialog.Builder(FinalizeOrderActivity.this);
-				adb.setTitle("Pedidos no Banco de Dados");
-
-				String ordersText = "";
-				for (Order order: orders){
-					ordersText+="\nID: "+order.getId()+"\n";
-					ordersText+="Mesa: "+order.getTable()+"\n";
-					ordersText+="Consumo:";
-					for (int i = 0; i < order.getFoodOrdered().length; i++){
-						if(order.getFoodOrdered()[i] > 0){
-							ordersText+="\n\t("+order.getFoodOrdered()[i]+") "+FoodDatabase.getInstance().getCardapio().get(i).getName();
-						}
-					}
-					ordersText+="\nTotal: "+Math.floor(order.getTotalSpent())+"\n";
-				}
-				adb.setMessage(ordersText);
-				adb.setNegativeButton("Fechar",new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog,int id) {
-						dialog.cancel();
-					}
-				});
-				adb.show();
-			}
-		});
 
 		bntRefreshValue = (Button) findViewById(R.id.btn_refresh_value);
 		bntRefreshValue.setOnClickListener(new OnClickListener() {
@@ -125,8 +105,10 @@ public class FinalizeOrderActivity extends Activity {
 			public void onClick(View v) {
 				//Toast.makeText(getApplicationContext(), "Clicou em Finalizar!\n" + myCurrentOrder.getOrders(), Toast.LENGTH_LONG).show();
 				Order saved = orderDbOperations.addOrder(myCurrentOrder);
-				Toast.makeText(getApplicationContext(), "Pedido da mesa "+ saved.getTable() + " salvo com sucesso!", Toast.LENGTH_LONG).show();
-				System.out.println("Pedido da mesa"+saved.getTable()+ "salvo com sucesso!");
+				//Toast.makeText(getApplicationContext(), "Pedido da mesa "+ saved.getTable() + " salvo com sucesso!", Toast.LENGTH_LONG).show();
+				alert.showAlertDialog(FinalizeOrderActivity.this, "Aviso", "Pedido da mesa" + saved.getTable() + "salvo com sucesso!\nAguarde o garçom e bom apetite!", false);
+				session.logoutUser();
+				System.out.println("Pedido da mesa" + saved.getTable() + "salvo com sucesso!");
 			}
 		});
 	}

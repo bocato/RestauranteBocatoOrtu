@@ -35,6 +35,14 @@
         android:textStyle="bold"
         android:textColor="#ffffff"/>
 
+    <Button android:id="@+id/btn_list_orders"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:text="Ver Banco de Dados"
+        android:layout_gravity="bottom" />
+
     <!-- Button to show session data -->
     <Button android:id="@+id/btn_logout"
         android:layout_width="fill_parent"

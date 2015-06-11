@@ -18,11 +18,14 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import comp.ufu.restaurante.R;
 import comp.ufu.restaurante.database.FoodDatabase;
+import comp.ufu.restaurante.database.sqlite.OrderOperations;
 import comp.ufu.restaurante.model.Order;
 import comp.ufu.restaurante.tools.AlertDialogManager;
 import comp.ufu.restaurante.tools.SessionManager;
@@ -37,16 +40,18 @@ public class MainScreen extends Activity {
 	private SessionManager session;
 
 	// Button Logout
-	private Button btnLogout, btnUpdate, btnCloseOrder;
+	private Button btnLogout, btnUpdate, btnCloseOrder, btnListOrders;
 
 	// food_listview
-	private ListView listViewEntradas, listViewCarnes, listViewPorcoes, listViewBebidas, listViewCardapio;
+	private ListView listViewCardapio;
 
 	// orders
 	private Order myCurrentOrder;
 
 	// my info
 	private String name, table;
+
+	private OrderOperations orderDbOperations = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,14 @@ public class MainScreen extends Activity {
 
 		final TextView lblName = (TextView) findViewById(R.id.label_name);
 		final TextView lblTable = (TextView) findViewById(R.id.label_table);
+
+		// start database
+		orderDbOperations = new OrderOperations(this);
+		try {
+			orderDbOperations.open();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		// Button logout
 		btnLogout = (Button) findViewById(R.id.btn_logout);
@@ -146,6 +159,36 @@ public class MainScreen extends Activity {
 		// Cardapio
 		inflateListViewLayouts();
 
+		btnListOrders = (Button) findViewById(R.id.btn_list_orders);
+		btnListOrders.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ArrayList<Order> orders = (ArrayList<Order>) orderDbOperations.getAllOrders();
+				AlertDialog.Builder adb = new AlertDialog.Builder(MainScreen.this);
+				adb.setTitle("Pedidos no Banco de Dados");
+
+				String ordersText = "";
+				for (Order order : orders) {
+					ordersText += "\nID: " + order.getId() + "\n";
+					ordersText += "Mesa: " + order.getTable() + "\n";
+					ordersText += "Consumo:";
+					for (int i = 0; i < order.getFoodOrdered().length; i++) {
+						if (order.getFoodOrdered()[i] > 0) {
+							ordersText += "\n\t(" + order.getFoodOrdered()[i] + ") " + FoodDatabase.getInstance().getCardapio().get(i).getName();
+						}
+					}
+					ordersText += "\nTotal: " + Math.floor(order.getTotalSpent()) + "\n";
+				}
+				adb.setMessage(ordersText);
+				adb.setNegativeButton("Fechar", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				});
+				adb.show();
+			}
+		});
+
 		// Button logout
 		btnCloseOrder = (Button) findViewById(R.id.btn_close_order);
 		btnCloseOrder.setOnClickListener(new OnClickListener() {
@@ -163,6 +206,12 @@ public class MainScreen extends Activity {
 			}
 		});
 
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		orderDbOperations.close();
 	}
 
 	private void inflateListViewLayouts(){
