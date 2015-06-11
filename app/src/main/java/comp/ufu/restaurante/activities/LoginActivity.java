@@ -17,6 +17,8 @@ import android.widget.Toast;
 import java.util.Map;
 
 import comp.ufu.restaurante.R;
+import comp.ufu.restaurante.database.FoodDatabase;
+import comp.ufu.restaurante.model.Order;
 import comp.ufu.restaurante.model.User;
 import comp.ufu.restaurante.tools.AlertDialogManager;
 import comp.ufu.restaurante.tools.SessionManager;
@@ -39,10 +41,38 @@ public class LoginActivity extends Activity {
     // Session Manager Class
     private SessionManager session;
 
+    // myCurrentOerder
+    private Order myCurrentOrder;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // get intent data
+        if(getIntent().hasExtra("name") && getIntent().hasExtra("table") && getIntent().hasExtra("current_order")){
+            String name_extra = getIntent().getExtras().getString("name");
+            String table_extra = getIntent().getExtras().getString("table");
+            String currentOrderString_extra = getIntent().getExtras().getString("current_order");
+
+            if(name_extra != null && table_extra != null && currentOrderString_extra != null){
+                name = name_extra;
+                table = table_extra;
+                myCurrentOrder = parseOrder(table_extra, currentOrderString_extra);
+            }
+
+            btnLogin = (Button) findViewById(R.id.btnLogin);
+            btnLogin.setText("Atualizar Dados");
+
+            txtName = (EditText) findViewById(R.id.txtName);
+            txtName.setText(name);
+
+            txtTable = (EditText) findViewById(R.id.txtTable);
+            txtTable.setText(table);
+        }
+        else{
+            myCurrentOrder = new Order(table);
+        }
 
         // Session Manager
         session = new SessionManager(getApplicationContext());
@@ -75,26 +105,37 @@ public class LoginActivity extends Activity {
 
                     }
                     else{
-                        final String _name = name, _table = table;
-                        AlertDialog.Builder adb = new AlertDialog.Builder(LoginActivity.this);
-                        adb.setTitle("Registrar?");
-                        adb.setMessage("Gostaria de registrar este Nome e Mesa?");
-                        adb.setNegativeButton("Não", null);
-                        adb.setPositiveButton("Sim",
-                                new AlertDialog.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog,
-                                                        int which) {
-                                        // Creating user login session
-                                        session.createLoginSession(_name, _table);
+                        if(btnLogin.getText().equals("Atualizar Dados")){
+                            // Creating user login session
+                            session.createLoginSession(name, table);
 
-                                        // Staring MainActivity
-                                        Intent i = new Intent(getApplicationContext(), MainScreen.class);
-                                        startActivity(i);
-                                        finish();
-                                    }
-                                });
-                        adb.show();
+                            // Staring MainActivity
+                            Intent i = new Intent(getApplicationContext(), MainScreen.class);
+                            startActivity(i);
+                            finish();
+                        }
+                        else{
+                            final String _name = name, _table = table;
+                            AlertDialog.Builder adb = new AlertDialog.Builder(LoginActivity.this);
+                            adb.setTitle("Registrar?");
+                            adb.setMessage("Gostaria de registrar este Nome e Mesa?");
+                            adb.setNegativeButton("Não", null);
+                            adb.setPositiveButton("Sim",
+                                    new AlertDialog.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog,
+                                                            int which) {
+                                            // Creating user login session
+                                            session.createLoginSession(_name, _table);
+
+                                            // Staring MainActivity
+                                            Intent i = new Intent(getApplicationContext(), MainScreen.class);
+                                            startActivity(i);
+                                            finish();
+                                        }
+                                    });
+                            adb.show();
+                        }
                     }
                 }else{
                     // user didn't entered username or table
@@ -104,5 +145,22 @@ public class LoginActivity extends Activity {
 
             }
         });
+    }
+
+    private Order parseOrder(String table, String orders){
+        Order myOrder = new Order();
+        myOrder.setTable(table);
+        int[] foodOrdered = new int[FoodDatabase.getInstance().getCardapio().size()];
+
+        String[] split1 = orders.split("-");
+        for (int i = 0; i < split1.length; i++){
+            String[] split2 = split1[i].split("#");
+            int id = Integer.parseInt(split2[0]);
+            int quantity = Integer.parseInt(split2[1]);
+            foodOrdered[id] = quantity;
+        }
+        myOrder.setFoodOrdered(foodOrdered);
+
+        return myOrder;
     }
 }

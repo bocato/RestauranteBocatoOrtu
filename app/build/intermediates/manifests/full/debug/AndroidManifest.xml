@@ -17,7 +17,9 @@
         android:theme="@android:style/Theme.Holo" >
         <activity
             android:name="comp.ufu.restaurante.activities.MainScreen"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:noHistory="true"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,12 +29,16 @@
         <!-- LoginActivity -->
         <activity
             android:name="comp.ufu.restaurante.activities.LoginActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:noHistory="true"
+            android:screenOrientation="portrait" >
         </activity>
         <!-- FinalizeOrderActivity -->
         <activity
             android:name="comp.ufu.restaurante.activities.FinalizeOrderActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:noHistory="true"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

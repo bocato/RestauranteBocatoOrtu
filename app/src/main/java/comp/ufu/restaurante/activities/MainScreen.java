@@ -68,6 +68,23 @@ public class MainScreen extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+
+		// get intent data
+		if(getIntent().hasExtra("name") && getIntent().hasExtra("table") && getIntent().hasExtra("current_order")){
+			String name_extra = getIntent().getExtras().getString("name");
+			String table_extra = getIntent().getExtras().getString("table");
+			String currentOrderString_extra = getIntent().getExtras().getString("current_order");
+
+			if(name_extra != null && table_extra != null && currentOrderString_extra != null){
+				name = name_extra;
+				table = table_extra;
+				myCurrentOrder = parseOrder(table_extra, currentOrderString_extra);
+			}
+		}
+		else{
+			myCurrentOrder = new Order(table);
+		}
+
 		// Session class instance
 		session = new SessionManager(getApplicationContext());
 
@@ -107,9 +124,6 @@ public class MainScreen extends Activity {
 		lblName.setText(Html.fromHtml("Nome: <b>" + name + "</b>"));
 		lblTable.setText(Html.fromHtml("Número da Mesa: <b>" + table + "</b>"));
 
-		// set my current order
-		myCurrentOrder = new Order(table);
-
 		/**
 		 * Logout button click event
 		 * */
@@ -129,39 +143,12 @@ public class MainScreen extends Activity {
 		btnUpdate.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				AlertDialog.Builder adb = new AlertDialog.Builder(MainScreen.this);
-				adb.setView(getLayoutInflater().inflate(R.layout.edit_userdata_dialog, null));
-				TextView editNameTextView = (TextView) findViewById(R.id.edit_name_txt);
-				TextView editTableTextView = (TextView) findViewById(R.id.edit_table_txt);
-				if(editNameTextView != null && editTableTextView != null){
-					editNameTextView.setText(name);
-					editTableTextView.setText(table);
-				}
-
-				adb.setTitle("Editar [Nome] e [Mesa]?");
-				adb.setNegativeButton("Fechar", null);
-				adb.setPositiveButton("Salvar",
-						new AlertDialog.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog,
-												int which) {
-								// Creating user login session
-								TextView editNameTextView = (TextView) findViewById(R.id.edit_name_txt);
-								TextView editTableTextView = (TextView) findViewById(R.id.edit_table_txt);
-								if(editNameTextView != null && editTableTextView != null){
-									name = editNameTextView.getText().toString();
-									table = editTableTextView.getText().toString();
-								}
-
-								session.getSharedPreferences().edit().putString(SessionManager.KEY_NAME, name).commit();
-								session.getSharedPreferences().edit().putString(SessionManager.KEY_TABLE, table).commit();
-
-								// update data
-								lblName.setText(Html.fromHtml("Nome: <b>" + name + "</b>"));
-								lblTable.setText(Html.fromHtml("Número da Mesa: <b>" + table + "</b>"));
-							}
-						});
-				adb.show();
+				Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+				i.putExtra("table", table);
+				i.putExtra("name", name);
+				i.putExtra("current_order", myCurrentOrder.getOrders());
+				startActivity(i);
+				finish();
 			}
 		});
 
@@ -312,5 +299,22 @@ public class MainScreen extends Activity {
 
 	public void setOrderDbOperations(OrderOperations orderDbOperations) {
 		this.orderDbOperations = orderDbOperations;
+	}
+
+	private Order parseOrder(String table, String orders){
+		Order myOrder = new Order();
+		myOrder.setTable(table);
+		int[] foodOrdered = new int[FoodDatabase.getInstance().getCardapio().size()];
+
+		String[] split1 = orders.split("-");
+		for (int i = 0; i < split1.length; i++){
+			String[] split2 = split1[i].split("#");
+			int id = Integer.parseInt(split2[0]);
+			int quantity = Integer.parseInt(split2[1]);
+			foodOrdered[id] = quantity;
+		}
+		myOrder.setFoodOrdered(foodOrdered);
+
+		return myOrder;
 	}
 }

@@ -88,7 +88,6 @@ public class FinalizeOrderActivity extends Activity {
 		textViewTotal.setText("" + Math.floor(Math.floor(myCurrentOrder.getTotalSpent())));
 
 		// Button
-
 		bntRefreshValue = (Button) findViewById(R.id.btn_refresh_value);
 		bntRefreshValue.setOnClickListener(new OnClickListener() {
 			@Override

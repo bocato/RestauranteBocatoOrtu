@@ -69,9 +69,6 @@ public class OrderListViewArrayAdapter extends ArrayAdapter<Food> {
         btnAddFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //System.out.println("INIT ** foodOrdered["+(food.getId()-1)+"] = "+ foodOrdered[food.getId()-1]);
-                
                 foodOrdered[food.getId()-1]++;
                 alert.showAlertDialog(getContext(), "Aviso", "Adicionou "+food.getName(), false);
                 String newQuantity = ""+foodOrdered[food.getId()-1];
@@ -106,12 +103,6 @@ public class OrderListViewArrayAdapter extends ArrayAdapter<Food> {
                 // update food quantity
                 TextView foodQuantityTextView = (TextView) finalConvertView.findViewById(R.id.food_quantity_txt);
                 foodQuantityTextView.setText(newQuantity);
-
-                // update total value on order
-                TextView totalValueTextView = (TextView) finalConvertView.findViewById(R.id.text_view_total_value);
-                if(totalValueTextView != null){
-                    totalValueTextView.setText("" + myCurrentOrder.getTotalSpent());
-                }
 
                 // remove from view
                 if(subtracted && foodOrdered[food.getId()-1] == 0){
