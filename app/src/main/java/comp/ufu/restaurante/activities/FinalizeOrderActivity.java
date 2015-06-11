@@ -1,6 +1,9 @@
 package comp.ufu.restaurante.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -10,9 +13,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import comp.ufu.restaurante.R;
 import comp.ufu.restaurante.database.FoodDatabase;
@@ -33,7 +38,7 @@ public class FinalizeOrderActivity extends Activity {
 	private SessionManager session;
 
 	// Button Logout
-	private Button btnFinalizeOrder, bntRefreshValue;
+	private Button btnFinalizeOrder, bntRefreshValue, btnListOrders;
 
 	// food_listview
 	private ListView listViewCardapio;
@@ -71,15 +76,45 @@ public class FinalizeOrderActivity extends Activity {
 		inflateListViewLayouts(table, currentOrderString);
 
 		textViewTotal = (TextView) findViewById(R.id.text_view_total_value);
-		textViewTotal.setText("" + myCurrentOrder.getTotalSpent());
+		textViewTotal.setText("" + Math.floor(Math.floor(myCurrentOrder.getTotalSpent())));
 
 		// Button
+		btnListOrders = (Button) findViewById(R.id.btn_list_orders);
+		btnListOrders.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ArrayList<Order> orders = (ArrayList<Order>) orderDbOperations.getAllOrders();
+				AlertDialog.Builder adb = new AlertDialog.Builder(FinalizeOrderActivity.this);
+				adb.setTitle("Pedidos no Banco de Dados");
+
+				String ordersText = "";
+				for (Order order: orders){
+					ordersText+="\nID: "+order.getId()+"\n";
+					ordersText+="Mesa: "+order.getTable()+"\n";
+					ordersText+="Consumo:";
+					for (int i = 0; i < order.getFoodOrdered().length; i++){
+						if(order.getFoodOrdered()[i] > 0){
+							ordersText+="\n\t("+order.getFoodOrdered()[i]+") "+FoodDatabase.getInstance().getCardapio().get(i).getName();
+						}
+					}
+					ordersText+="\nTotal: "+Math.floor(order.getTotalSpent())+"\n";
+				}
+				adb.setMessage(ordersText);
+				adb.setNegativeButton("Fechar",new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,int id) {
+						dialog.cancel();
+					}
+				});
+				adb.show();
+			}
+		});
+
 		bntRefreshValue = (Button) findViewById(R.id.btn_refresh_value);
 		bntRefreshValue.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				TextView textViewTotal = (TextView) findViewById(R.id.text_view_total_value);
-				textViewTotal.setText("" + myCurrentOrder.getTotalSpent());
+				textViewTotal.setText("" +  Math.floor(myCurrentOrder.getTotalSpent()));
 			}
 		});
 
@@ -91,6 +126,7 @@ public class FinalizeOrderActivity extends Activity {
 				//Toast.makeText(getApplicationContext(), "Clicou em Finalizar!\n" + myCurrentOrder.getOrders(), Toast.LENGTH_LONG).show();
 				Order saved = orderDbOperations.addOrder(myCurrentOrder);
 				Toast.makeText(getApplicationContext(), "Pedido da mesa "+ saved.getTable() + " salvo com sucesso!", Toast.LENGTH_LONG).show();
+				System.out.println("Pedido da mesa"+saved.getTable()+ "salvo com sucesso!");
 			}
 		});
 	}
@@ -140,4 +176,9 @@ public class FinalizeOrderActivity extends Activity {
 		listViewCardapio.setAdapter(new OrderListViewArrayAdapter(this, foodOrdered, myCurrentOrder));
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		orderDbOperations.close();
+	}
 }
