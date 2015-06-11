@@ -2002,6 +2002,7 @@ containing a value of this type.
         public static final int Widget_AppCompat_TextView_SpinnerItem=0x7f07011a;
         public static final int Widget_AppCompat_Toolbar=0x7f07011b;
         public static final int Widget_AppCompat_Toolbar_Button_Navigation=0x7f07011c;
+        public static final int Widget_Sphinx_ActionBar_Solid=0x7f07011d;
     }
     public static final class styleable {
         /** Attributes that can be used with a ActionBar.

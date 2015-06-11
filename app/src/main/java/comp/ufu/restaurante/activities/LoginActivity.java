@@ -51,9 +51,6 @@ public class LoginActivity extends Activity {
         txtName = (EditText) findViewById(R.id.txtName);
         txtTable = (EditText) findViewById(R.id.txtTable);
 
-        //Toast.makeText(getApplicationContext(), "Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
-
-
         // Login button
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -78,8 +75,6 @@ public class LoginActivity extends Activity {
 
                     }
                     else{
-                        // username / table doesn't match
-                        //alert.showAlertDialog(LoginActivity.this, "Login falhou...", "Nome/Mesa incorretos.", false);
                         final String _name = name, _table = table;
                         AlertDialog.Builder adb = new AlertDialog.Builder(LoginActivity.this);
                         adb.setTitle("Registrar?");

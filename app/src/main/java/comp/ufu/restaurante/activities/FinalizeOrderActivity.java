@@ -103,12 +103,35 @@ public class FinalizeOrderActivity extends Activity {
 		btnFinalizeOrder.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//Toast.makeText(getApplicationContext(), "Clicou em Finalizar!\n" + myCurrentOrder.getOrders(), Toast.LENGTH_LONG).show();
-				Order saved = orderDbOperations.addOrder(myCurrentOrder);
-				//Toast.makeText(getApplicationContext(), "Pedido da mesa "+ saved.getTable() + " salvo com sucesso!", Toast.LENGTH_LONG).show();
-				alert.showAlertDialog(FinalizeOrderActivity.this, "Aviso", "Pedido da mesa" + saved.getTable() + "salvo com sucesso!\nAguarde o garçom e bom apetite!", false);
-				session.logoutUser();
-				System.out.println("Pedido da mesa" + saved.getTable() + "salvo com sucesso!");
+				if (foodOrdered.size() > 0){
+					Order saved = orderDbOperations.addOrder(myCurrentOrder);
+					alert.showAlertDialog(FinalizeOrderActivity.this, "Aviso", "Pedido da mesa " + saved.getTable() + " salvo com sucesso!\nAguarde o garçom e bom apetite!", false);
+					session.logoutUser();
+				}
+				else{
+					AlertDialog.Builder adb = new AlertDialog.Builder(FinalizeOrderActivity.this);
+					adb.setTitle("Finalizar?");
+					adb.setMessage("Seu pedido está vazio.\nDeseja voltar ao cardápio?");
+					adb.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							alert.showAlertDialog(FinalizeOrderActivity.this, "Aviso", "Pedido finalizado, porém vazio.", false);
+							session.logoutUser();
+						}
+					});
+					adb.setPositiveButton("Sim",
+							new AlertDialog.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+													int which) {
+									// Staring MainActivity
+									Intent i = new Intent(getApplicationContext(), MainScreen.class);
+									startActivity(i);
+									finish();
+								}
+							});
+					adb.show();
+				}
 			}
 		});
 	}
@@ -124,12 +147,8 @@ public class FinalizeOrderActivity extends Activity {
 			int id = Integer.parseInt(split2[0]);
 			int quantity = Integer.parseInt(split2[1]);
 			foodOrdered[id] = quantity;
-			//System.out.println(i+" ~ foodOrdered["+id+"] = "+quantity);
 		}
-
 		myOrder.setFoodOrdered(foodOrdered);
-
-		//System.out.println("Orders = " + myOrder.getOrders());
 
 		return myOrder;
 	}
@@ -140,7 +159,6 @@ public class FinalizeOrderActivity extends Activity {
 		for (int i = 0; i < myCurrentOrder.getFoodOrdered().length; i++){
 			int id = i;
 			Food aFood = FoodDatabase.getInstance().getCardapio().get(id);
-			//System.out.println(aFood.getName()+" = "+myCurrentOrder.getFoodOrdered()[id]);
 			if(myCurrentOrder.getFoodOrdered()[id] > 0){
 				myFood.add(aFood);
 			}

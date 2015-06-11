@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,7 +73,6 @@ public class OrderListViewArrayAdapter extends ArrayAdapter<Food> {
                 //System.out.println("INIT ** foodOrdered["+(food.getId()-1)+"] = "+ foodOrdered[food.getId()-1]);
                 
                 foodOrdered[food.getId()-1]++;
-                //Toast.makeText(getContext(), "Adicionou "+food.getName(), Toast.LENGTH_SHORT).show();
                 alert.showAlertDialog(getContext(), "Aviso", "Adicionou "+food.getName(), false);
                 String newQuantity = ""+foodOrdered[food.getId()-1];
                 myCurrentOrder.setFoodOrdered(foodOrdered);
@@ -86,25 +86,21 @@ public class OrderListViewArrayAdapter extends ArrayAdapter<Food> {
                 if(totalValueTextView != null){
                     totalValueTextView.setText("" + myCurrentOrder.getTotalSpent());
                 }
-                //System.out.println(food.getName() + " = " + newQuantity);
-
-                //System.out.println("END ** foodOrdered["+(food.getId()-1)+"] = "+ foodOrdered[food.getId()-1]);
             }
         });
 
         btnSubtractFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //System.out.println("INIT ** foodOrdered["+(food.getId()-1)+"] = "+ foodOrdered[food.getId()-1]);
-
+                boolean subtracted = false;
                 if(foodOrdered[food.getId()-1] > 0){
                     foodOrdered[food.getId()-1]--;
+                    subtracted = true;
                     String newQuantity = ""+foodOrdered[food.getId()-1];
                     myCurrentOrder.setFoodOrdered(foodOrdered);
-                    //Toast.makeText(getContext(), "Removeu "+food.getName(), Toast.LENGTH_SHORT).show();
-                    alert.showAlertDialog(getContext(), "Aviso", "Adicionou "+food.getName(), false);
+                    alert.showAlertDialog(getContext(), "Aviso", "Removeu "+food.getName(), false);
                 }
+
                 String newQuantity = "" + foodOrdered[food.getId()-1];
 
                 // update food quantity
@@ -116,9 +112,11 @@ public class OrderListViewArrayAdapter extends ArrayAdapter<Food> {
                 if(totalValueTextView != null){
                     totalValueTextView.setText("" + myCurrentOrder.getTotalSpent());
                 }
-                //System.out.println(food.getName() + " = " + newQuantity);
 
-                //System.out.println("END ** foodOrdered["+(food.getId()-1)+"] = "+ foodOrdered[food.getId()-1]);
+                // remove from view
+                if(subtracted && foodOrdered[food.getId()-1] == 0){
+                    remove(food);
+                }
             }
         });
 

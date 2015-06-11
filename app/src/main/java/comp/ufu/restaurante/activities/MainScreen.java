@@ -51,7 +51,17 @@ public class MainScreen extends Activity {
 	// my info
 	private String name, table;
 
+	// flag
+	private boolean hasOrderedSomething;
+
 	private OrderOperations orderDbOperations = null;
+
+	public MainScreen(){}
+
+	public MainScreen(ListView listViewCardapio, Order myCurrentOrder) {
+		this.listViewCardapio = listViewCardapio;
+		this.myCurrentOrder = myCurrentOrder;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -119,7 +129,6 @@ public class MainScreen extends Activity {
 		btnUpdate.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//Toast.makeText(getApplicationContext(), "Clicou em Atualizar Dados!", Toast.LENGTH_LONG).show();
 				AlertDialog.Builder adb = new AlertDialog.Builder(MainScreen.this);
 				adb.setView(getLayoutInflater().inflate(R.layout.edit_userdata_dialog, null));
 				TextView editNameTextView = (TextView) findViewById(R.id.edit_name_txt);
@@ -194,8 +203,6 @@ public class MainScreen extends Activity {
 		btnCloseOrder.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//Toast.makeText(getApplicationContext(), "Clicou em Finalizar!\n"+myCurrentOrder.getOrders(), Toast.LENGTH_LONG).show();
-
 				// Starting FinalizeOrderActivity
 				Intent i = new Intent(getApplicationContext(), FinalizeOrderActivity.class);
 				i.putExtra("table", table);
@@ -221,5 +228,89 @@ public class MainScreen extends Activity {
 
 	public Order getMyCurrentOrder() {
 		return myCurrentOrder;
+	}
+
+	public AlertDialogManager getAlert() {
+		return alert;
+	}
+
+	public void setAlert(AlertDialogManager alert) {
+		this.alert = alert;
+	}
+
+	public SessionManager getSession() {
+		return session;
+	}
+
+	public void setSession(SessionManager session) {
+		this.session = session;
+	}
+
+	public Button getBtnLogout() {
+		return btnLogout;
+	}
+
+	public void setBtnLogout(Button btnLogout) {
+		this.btnLogout = btnLogout;
+	}
+
+	public Button getBtnUpdate() {
+		return btnUpdate;
+	}
+
+	public void setBtnUpdate(Button btnUpdate) {
+		this.btnUpdate = btnUpdate;
+	}
+
+	public Button getBtnCloseOrder() {
+		return btnCloseOrder;
+	}
+
+	public void setBtnCloseOrder(Button btnCloseOrder) {
+		this.btnCloseOrder = btnCloseOrder;
+	}
+
+	public Button getBtnListOrders() {
+		return btnListOrders;
+	}
+
+	public void setBtnListOrders(Button btnListOrders) {
+		this.btnListOrders = btnListOrders;
+	}
+
+	public ListView getListViewCardapio() {
+		return listViewCardapio;
+	}
+
+	public void setListViewCardapio(ListView listViewCardapio) {
+		this.listViewCardapio = listViewCardapio;
+	}
+
+	public void setMyCurrentOrder(Order myCurrentOrder) {
+		this.myCurrentOrder = myCurrentOrder;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getTable() {
+		return table;
+	}
+
+	public void setTable(String table) {
+		this.table = table;
+	}
+
+	public OrderOperations getOrderDbOperations() {
+		return orderDbOperations;
+	}
+
+	public void setOrderDbOperations(OrderOperations orderDbOperations) {
+		this.orderDbOperations = orderDbOperations;
 	}
 }
