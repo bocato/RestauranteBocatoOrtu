@@ -1,10 +1,13 @@
 package comp.ufu.restaurante.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -53,8 +56,8 @@ public class MainScreen extends Activity {
 		// Session class instance
 		session = new SessionManager(getApplicationContext());
 
-		TextView lblName = (TextView) findViewById(R.id.label_name);
-		TextView lblTable = (TextView) findViewById(R.id.label_table);
+		final TextView lblName = (TextView) findViewById(R.id.label_name);
+		final TextView lblTable = (TextView) findViewById(R.id.label_table);
 
 		// Button logout
 		btnLogout = (Button) findViewById(R.id.btn_logout);
@@ -98,11 +101,45 @@ public class MainScreen extends Activity {
 			}
 		});
 
-		btnUpdate = (Button) findViewById(R.id.btn_update); // TODO: Implement
+		// TODO: Fazer Funcionar!
+		btnUpdate = (Button) findViewById(R.id.btn_update);
 		btnUpdate.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(), "Clicou em Atualizar Dados!", Toast.LENGTH_LONG).show();
+				//Toast.makeText(getApplicationContext(), "Clicou em Atualizar Dados!", Toast.LENGTH_LONG).show();
+				AlertDialog.Builder adb = new AlertDialog.Builder(MainScreen.this);
+				adb.setView(getLayoutInflater().inflate(R.layout.edit_userdata_dialog, null));
+				TextView editNameTextView = (TextView) findViewById(R.id.edit_name_txt);
+				TextView editTableTextView = (TextView) findViewById(R.id.edit_table_txt);
+				if(editNameTextView != null && editTableTextView != null){
+					editNameTextView.setText(name);
+					editTableTextView.setText(table);
+				}
+
+				adb.setTitle("Editar [Nome] e [Mesa]?");
+				adb.setNegativeButton("Fechar", null);
+				adb.setPositiveButton("Salvar",
+						new AlertDialog.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+												int which) {
+								// Creating user login session
+								TextView editNameTextView = (TextView) findViewById(R.id.edit_name_txt);
+								TextView editTableTextView = (TextView) findViewById(R.id.edit_table_txt);
+								if(editNameTextView != null && editTableTextView != null){
+									name = editNameTextView.getText().toString();
+									table = editTableTextView.getText().toString();
+								}
+
+								session.getSharedPreferences().edit().putString(SessionManager.KEY_NAME, name).commit();
+								session.getSharedPreferences().edit().putString(SessionManager.KEY_TABLE, table).commit();
+
+								// update data
+								lblName.setText(Html.fromHtml("Nome: <b>" + name + "</b>"));
+								lblTable.setText(Html.fromHtml("Número da Mesa: <b>" + table + "</b>"));
+							}
+						});
+				adb.show();
 			}
 		});
 
@@ -114,7 +151,7 @@ public class MainScreen extends Activity {
 		btnCloseOrder.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(), "Clicou em Finalizar!\n"+myCurrentOrder.getOrders(), Toast.LENGTH_LONG).show();
+				//Toast.makeText(getApplicationContext(), "Clicou em Finalizar!\n"+myCurrentOrder.getOrders(), Toast.LENGTH_LONG).show();
 
 				// Starting FinalizeOrderActivity
 				Intent i = new Intent(getApplicationContext(), FinalizeOrderActivity.class);

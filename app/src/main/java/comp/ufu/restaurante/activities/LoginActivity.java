@@ -56,8 +56,6 @@ public class LoginActivity extends Activity {
 
         // Login button
         btnLogin = (Button) findViewById(R.id.btnLogin);
-
-        // Login button click event
         btnLogin.setOnClickListener(new View.OnClickListener() {
 
             @Override
